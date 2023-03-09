@@ -3,4 +3,6 @@
     <string name="time_unit_conversion">Time Unit Conversion</string>
     <string name="from">From</string>
     <string name="to">To</string>
+    <string name="enter_value">Enter value</string>
+    <string name="calculate">Calculate</string>
 </resources>
