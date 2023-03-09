@@ -36,9 +36,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set Source Unit Adapter to the Spinner
         val sourceAdapter = ArrayAdapter(this, R.layout.units_dropdown_menu, sourceUnits)
         binding.spinnerSourceUnit.adapter = sourceAdapter
 
+        // Set Destination Unit Adapter to the Spinner
         destinationAdapter = ArrayAdapter(
             this@MainActivity,
             R.layout.units_dropdown_menu,
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     when (p2) {
-                        0 -> disableDestinationUnitSpinner()
+                        0 -> disableDestinationUnitSpinner()        // Destination Units Spinner will be disabled if nothing selected
                         1 -> {
                             val answerArray = mutableListOf(
                                 0.0,
@@ -103,16 +105,18 @@ class MainActivity : AppCompatActivity() {
             }
 
         binding.btnCalculate.setOnClickListener {
-            if (binding.etValue.text.isEmpty()) {
+            if (binding.etValue.text.isEmpty()) {   // If value isn't entered, shows an error message at edit text field
                 binding.etValue.error = "Please enter any value."
             } else {
+                // Exception Handling (If edit text value is invalid)
                 try {
                     queValue = binding.etValue.text.toString().toDouble()
+                    calculatedAns *= queValue   // Calculate the answer multiplying by entered value
+                    binding.tvAnswer.visibility = View.VISIBLE      // Answer field will be visible after calculating it
+                    binding.tvAnswer.text = "Answer:- $calculatedAns"
                 } catch (_: java.lang.NumberFormatException) {
+                    printToastMessage("Please enter valid value to convert from $sourceUnit to $destinationUnit")
                 }
-                calculatedAns *= queValue
-                binding.tvAnswer.visibility = View.VISIBLE
-                binding.tvAnswer.text = "Answer:- $calculatedAns"
             }
         }
 
@@ -123,10 +127,11 @@ class MainActivity : AppCompatActivity() {
         copiedUnits.removeAt(index)
         answerArray.removeAt(index)
 
+        // Set Destination Unit Adapter to the Spinner
         destinationAdapter = ArrayAdapter(this, R.layout.units_dropdown_menu, copiedUnits)
         binding.spinnerDestinationUnit.adapter = destinationAdapter
 
-        enableDestinationUnitSpinner()
+        enableDestinationUnitSpinner()   // Now Source Unit is selected from the spinner so Destination Spinner will be enabled
 
         binding.spinnerDestinationUnit.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -140,6 +145,7 @@ class MainActivity : AppCompatActivity() {
                             binding.btnCalculate.visibility = View.GONE
                         }
                         else -> {
+                            // When Destination Unit is selected, textfield for value and calculate button is visible
                             binding.etValue.visibility = View.VISIBLE
                             binding.btnCalculate.visibility = View.VISIBLE
                             calculatedAns = answerArray[p2]
