@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var destinationAdapter: ArrayAdapter<String>
 
     var calculatedAns = 0.0
+    var queValue = 0.0
+    var sourceUnit = ""
+    var destinationUnit = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,23 +98,24 @@ class MainActivity : AppCompatActivity() {
                             setDestinationAdapter(p2, answerArray)
                         }
                     }
+                    sourceUnit = sourceUnits[p2]
                 }
             }
 
-//        binding.spinnerDestinationUnit.onItemSelectedListener =
-//            object : AdapterView.OnItemSelectedListener {
-//                override fun onNothingSelected(p0: AdapterView<*>?) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                    when (p2) {
-//                        1 -> {
-//
-//                        }
-//                    }
-//                }
-//            }
+        binding.btnCalculate.setOnClickListener {
+            if (binding.etValue.text.isEmpty()) {
+                binding.etValue.error = "Please enter any value."
+            } else {
+                try {
+                    queValue = binding.etValue.text.toString().toDouble()
+                } catch (_: java.lang.NumberFormatException) {
+                }
+                calculatedAns *= queValue
+                binding.tvAnswer.visibility = View.VISIBLE
+                binding.tvAnswer.text = "Answer:- $calculatedAns"
+            }
+        }
+
     }
 
     private fun setDestinationAdapter(index: Int, answerArray: MutableList<Double>) {
@@ -132,13 +136,17 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     when (p2) {
                         0 -> {
-
+                            binding.etValue.visibility = View.GONE
+                            binding.btnCalculate.visibility = View.GONE
                         }
                         else -> {
+                            binding.etValue.visibility = View.VISIBLE
+                            binding.btnCalculate.visibility = View.VISIBLE
                             calculatedAns = answerArray[p2]
                             println("Answer: $calculatedAns")
                         }
                     }
+                    destinationUnit = copiedUnits[p2]
                 }
             }
 

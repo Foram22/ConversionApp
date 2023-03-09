@@ -63,8 +63,13 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/tv_background"
         android:hint="@string/enter_value"
+        android:inputType="numberDecimal"
         android:paddingHorizontal="20dp"
         android:paddingVertical="5dp"
+        android:textColor="@color/blue_700"
+        android:textColorHint="@color/blue_700"
+        android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/spinner_destination_unit" />
 
     <Button
@@ -75,6 +80,7 @@
         android:paddingHorizontal="40dp"
         android:text="@string/calculate"
         android:textAllCaps="false"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etValue" />
