@@ -41,11 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding.spinnerSourceUnit.adapter = sourceAdapter
 
         // Set Destination Unit Adapter to the Spinner
-        destinationAdapter = ArrayAdapter(
-            this@MainActivity,
-            R.layout.units_dropdown_menu,
-            destinationUnits
-        )
+        destinationAdapter = ArrayAdapter(this, R.layout.units_dropdown_menu, destinationUnits)
         binding.spinnerDestinationUnit.adapter = destinationAdapter
 
         binding.spinnerSourceUnit.onItemSelectedListener =
@@ -111,9 +107,11 @@ class MainActivity : AppCompatActivity() {
                 // Exception Handling (If edit text value is invalid)
                 try {
                     queValue = binding.etValue.text.toString().toDouble()
-                    calculatedAns *= queValue   // Calculate the answer multiplying by entered value
-                    binding.tvAnswer.visibility = View.VISIBLE      // Answer field will be visible after calculating it
-                    binding.tvAnswer.text = "Answer:- $calculatedAns"
+                    val answer = calculatedAns * queValue
+                    // Calculate the answer multiplying by entered value
+                    binding.tvAnswer.visibility =
+                        View.VISIBLE      // Answer field will be visible after calculating it
+                    binding.tvAnswer.text = "Answer:- $answer"
                 } catch (_: java.lang.NumberFormatException) {
                     printToastMessage("Please enter valid value to convert from $sourceUnit to $destinationUnit")
                 }
