@@ -24,43 +24,59 @@
         android:id="@+id/tvFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/from"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-    <Spinner
-        android:id="@+id/spinner_source_unit"
+    <LinearLayout
+        android:id="@+id/llSource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@drawable/tv_background"
-        app:layout_constraintTop_toBottomOf="@id/tvFrom" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvFrom">
+
+        <Spinner
+            android:id="@+id/spinner_source_unit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/blue_700" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/to"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_source_unit" />
+        app:layout_constraintTop_toBottomOf="@id/llSource" />
 
-    <Spinner
-        android:id="@+id/spinner_destination_unit"
+    <LinearLayout
+        android:id="@+id/llDest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@drawable/tv_background"
-        app:layout_constraintTop_toBottomOf="@id/tvTo" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvTo">
+
+        <Spinner
+            android:id="@+id/spinner_destination_unit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/blue_700" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/tv_background"
         android:hint="@string/enter_value"
         android:inputType="numberDecimal"
@@ -70,7 +86,7 @@
         android:textColorHint="@color/blue_700"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/spinner_destination_unit" />
+        app:layout_constraintTop_toBottomOf="@id/llDest" />
 
     <Button
         android:id="@+id/btnCalculate"
@@ -90,6 +106,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/tv_background"
+        android:gravity="center"
         android:textColor="@color/blue_700"
         android:textSize="20sp"
         android:textStyle="bold"

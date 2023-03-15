@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    binding.etValue.text.clear()
                     when (p2) {
                         0 -> disableDestinationUnitSpinner()        // Destination Units Spinner will be disabled if nothing selected
                         1 -> {
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                     // Calculate the answer multiplying by entered value
                     binding.tvAnswer.visibility =
                         View.VISIBLE      // Answer field will be visible after calculating it
-                    binding.tvAnswer.text = "Answer:- $answer"
+                    binding.tvAnswer.text = answer.toString()
                 } catch (_: java.lang.NumberFormatException) {
                     printToastMessage("Please enter valid value to convert from $sourceUnit to $destinationUnit")
                 }
@@ -141,6 +142,7 @@ class MainActivity : AppCompatActivity() {
                         0 -> {
                             binding.etValue.visibility = View.GONE
                             binding.btnCalculate.visibility = View.GONE
+                            binding.tvAnswer.visibility = View.GONE
                         }
                         else -> {
                             // When Destination Unit is selected, textfield for value and calculate button is visible
